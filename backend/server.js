@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Backend is working for LinguaKids!');
+    res.send('Backend is working for EriGenius!');
 });
 
 // Start Server
