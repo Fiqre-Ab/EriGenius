@@ -5,7 +5,11 @@
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/about">About</router-link></li>
       <li><router-link to="/courses">Courses</router-link></li>
+      <li><router-link to="/faculty">faculty</router-link></li>
+      <li><router-link to="/tuition">Tuition</router-link></li>
       <li><router-link to="/contact">Contact</router-link></li>
+      <li><router-link to="/apply">Apply Now</router-link></li>
+      
     </ul>
   </nav>
 </template>
