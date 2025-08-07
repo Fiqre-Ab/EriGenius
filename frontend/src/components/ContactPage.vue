@@ -31,17 +31,35 @@ export default {
         email: '',
         message: ''
       },
-      submitted: false
+      submitted: false,
+      error: null
     }
   },
-  methods: {
-    submitForm() {
-      this.submitted = true;
-      console.log("Contact form submitted:", this.form);
-      // Optionally integrate email service or backend call
+methods: {
+    async submitForm() {
+      try {
+        const response = await fetch('http://localhost:5000/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.form)
+        });
+
+        if (!response.ok) {
+          throw new Error('Something went wrong while submitting');
+        }
+
+        this.submitted = true;
+        this.error = null;
+        console.log('Form submitted successfully!');
+      } catch (err) {
+        console.error('Submit error:', err);
+        this.error = 'Failed to submit application. Please try again.';
+      }
     }
   }
-}
+};
 </script>
 
 <style scoped>

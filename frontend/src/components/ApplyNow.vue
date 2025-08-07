@@ -40,17 +40,36 @@ export default {
         interest: '',
         notes: ''
       },
-      submitted: false
+      submitted: false,
+      error: null
     }
   },
   methods: {
-    submitForm() {
-      this.submitted = true;
-      // You could integrate API/email/send logic here
-      console.log("Application submitted:", this.form);
+    async submitForm() {
+      try {
+        const response = await fetch('http://localhost:5000/api/apply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.form)
+        });
+
+        if (!response.ok) {
+          throw new Error('Something went wrong while submitting');
+        }
+
+        this.submitted = true;
+        this.error = null;
+        this.form = { name: '', email: '', message: '' };
+        console.log('Form submitted successfully!');
+      } catch (err) {
+        this.error = err.message || 'Something went wrong.';
+        this.submitted = false;
+      }
     }
   }
-}
+};
 </script>
 
 <style scoped>
